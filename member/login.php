@@ -46,12 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_address = $address;
             $param_photo = $photo;
 
-            // $param_fullname = $fullname;
-            // $param_pnum = $gender;            
-            // $param_pnum = $course;            
-            // $param_regno = $regno;            
-            // $param_pnum = $pnum;            
-            // $param_email = $email;
+           
 			$stmt1->execute();
             $stmt1->store_result();
                         
