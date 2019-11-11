@@ -239,5 +239,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <script src="js/freelancer.min.js"></script>
 
 </body>
-
+  
 </html>
+
+
