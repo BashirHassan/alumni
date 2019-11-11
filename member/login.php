@@ -8,6 +8,8 @@ include('config.php');
 $fullname = $gender = $faculty = $course = $matric_number = $graduation_year = $phone = $email = $address = $photo = $password = $confirm_password  = "";
 $email_err = $password_err = $confirm_password_err = "";
  
+// bashir hassan
+
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -34,18 +36,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $stmt1 = $mysqli->prepare($sql);
             $stmt1->bind_param("s", $param_email);            
                 
-            //Set parameters
-            $param_fullname = $fullname;
-            $param_gender = $gender;
-            $param_faculty = $faculty;
-            $param_course = $course;
-            $param_matric_number = $matric_number;
-            $param_graduation_year = $graduation_year;
-            $param_phone = $phone;
+            // Set parameters
+            // $param_fullname = $fullname;
+            // $param_pnum = $gender;            
+            // $param_pnum = $course;            
+            // $param_regno = $regno;            
+            // $param_pnum = $pnum;            
             $param_email = $email;
-            $param_address = $address;
-            $param_photo = $photo;
-
 			$stmt1->execute();
             $stmt1->store_result();
                         
@@ -65,17 +62,65 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Password is correct, so start a new session
                             session_start();
                             
+                             // Store data in session variables
+                             $_SESSION["loggedin"] = true;
+                             $_SESSION["id"] = $id;
+                             $_SESSION["fullname"] = $fullname;
+                             $_SESSION["gender"] = $gender;                                                       
+                             $_SESSION["email"] = $email;
+                                                      
+                            // Redirect user to index page
+                            header("location: member-index.php");
+                            
+                        } else{
+                            // Display an error message if password is not valid
+                            $password_err = "Incorrect Password!";
+                        }
+                    }
+                } else{
+                    // Display an error message if email doesn't exist
+                    $email_err = "This email does not belong to a registered member.";
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        } else{
+            $sql2 = "SELECT id, fullname, email, pnum, password, photo FROM admin WHERE email = ?";
+           
+            // Bind variables to the prepared statement as parameters
+            $stmt2 = $mysqli->prepare($sql2);
+            $stmt2->bind_param("s", $param_email);
+            
+            // // Set parameters
+            $param_fullname = $fullname;
+            $param_email = $email;
+            $param_pnum = $pnum;
+            // $param_photo = $_FILES['image']['name'];
+
+            // Attempt to execute the prepared statement
+            if($stmt2->execute()){
+                // Store result
+                $stmt2->store_result();
+                
+                // Check if email exists, if yes then verify password
+                if($stmt2->num_rows == 1){                    
+                    // Bind result variables
+                    $stmt2->bind_result($id, $fullname, $email, $pnum, $hashed_password, $photo);
+                    if($stmt2->fetch()){
+                        if(password_verify($password, $hashed_password)){
+                            // Password is correct, so start a new session
+                            session_start();
+                            
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["fullname"] = $fullname;
-                            $_SESSION["gender"] = $gender;                                                       
-                            $_SESSION["email"] = $email;
+                            $_SESSION["email"] = $email;                            
+                            $_SESSION["pnum"] = $pnum;                            
+                            $_SESSION["photo"] = $photo;                            
                             
-                               // Redirect member to index page
-                                header("location: ../dashboard.php");
-                           
-                             
+                            // Redirect user to welcome page
+                            header("location: admin_index.php");
                         } else{
                             // Display an error message if password is not valid
                             $password_err = "Incorrect Password!";
@@ -89,9 +134,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 echo "Oops! Something went wrong. Please try again later.";
             }
         }
+        
+        // Close statement
+        $stmt1->close();
+        // $stmt2->close();
     }
-
+    
+    // Close connection
+    $mysqli->close();
 }
+?>
 
 ?>
 
