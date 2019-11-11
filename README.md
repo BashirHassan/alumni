@@ -1,1 +1,3 @@
 alumni
+the admind login has not finish... 
+we are just adding some validations.
