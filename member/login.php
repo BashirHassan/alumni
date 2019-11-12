@@ -4,7 +4,7 @@ session_start();
 // Include config file
 //include('config.php');
 include ('connk.php');
-require 'class.php';
+// require 'class.php';
 
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
