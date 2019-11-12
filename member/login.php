@@ -18,7 +18,7 @@ if (isset($_POST['login'])) {
     $bind->execute();
     $stmt = $bind->fetchAll(PDO::FETCH_OBJ);
 
-    $query1 = "SELECT  email,password FROM members WHERE email = :email OR password = :password AND designation = 'secretary'";
+    $query1 = "SELECT  email,password FROM members WHERE email = :email AND password = :password";
     $bind1 = $pdo->prepare($query1);
     $bind1->bindParam(':email', $email, PDO::PARAM_STR);
     $bind1->bindParam(':password', $password, PDO::PARAM_STR);
@@ -33,7 +33,7 @@ if (isset($_POST['login'])) {
         if ($bind->rowCount() > 0) {
             $_SESSION['alogin'] = $_POST['email'];
             //$_SESSION['alogin'] = $_POST['password'];
-                header("location:alumni/dashboard.php");
+                header("location:../dashboard.php");
         }else{
             echo "<script>
             
@@ -212,7 +212,7 @@ if (isset($_POST['login'])) {
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>G S U Alumni</title>
+  <title>Muslim-Ummah G S U</title>
 
   <!-- Custom fonts for this theme -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -252,7 +252,7 @@ if (isset($_POST['login'])) {
                     <!-- login logo -->
                     <img class="mb-4 mx-auto" src="img/logo.jpg" alt="" width="100" height="100">
                     <!-- login header -->
-                    <h1 class="h3 mb-3 font-weight-normal">Member Login</h1>
+                    <h1 class="h3 mb-3 font-weight-normal">Account Login</h1>
 
                     <div class="form-group">
                         <input type="email" name="email" class="form-control" value="" placeholder="Email address">
@@ -271,7 +271,7 @@ if (isset($_POST['login'])) {
                 <!-- membership register link -->
                 <p class="mt-2 mb-1 text-default">Not a member? <a href="register.php">Register</a></p>
                 <!-- copyright -->
-                <p class="mt-2 mb-1 text-muted">&copy; G S U Alumni <?php echo date('Y'); ?></p>
+                <p class="mt-2 mb-1 text-muted">&copy; Muslim-Ummah G S U <?php echo date('Y'); ?></p>
 
             </div>
         </div>
