@@ -194,7 +194,7 @@
         <div class="col-md-6 mx-auto">
             <button class="btn btn-lg btn-outline-light dropdown-toggle mb-3 px-5" data-toggle="collapse" data-target="#aims">L o g i n</button>
             <div id="aims" class="collapse">
-                <form name="sentMessage" action="mail/contact_me.php" novalidate="novalidate">
+                <form name="sentMessage" action="member/mail/contact_me.php" novalidate="novalidate">
                     
                     <div class="control-group">
                       <div class="form-group floating-label-form-group controls mb-0">
