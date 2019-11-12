@@ -247,7 +247,7 @@ if (isset($_POST['login'])) {
             <div class="card-body">
                 <!-- <?php echo $row['fullname'];?> -->
                 <!-- member login form -->
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                <form action="login.php" method="POST">
 
                     <!-- login logo -->
                     <img class="mb-4 mx-auto" src="img/logo.jpg" alt="" width="100" height="100">
@@ -255,16 +255,16 @@ if (isset($_POST['login'])) {
                     <h1 class="h3 mb-3 font-weight-normal">Member Login</h1>
 
                     <div class="form-group">
-                        <input type="email" name="email" class="form-control" value="<?php echo $email ?>"placeholder="Email address">
-                        <span class="help-block text-danger"><?php echo $email_err; ?></span>                                                                                                    
+                        <input type="email" name="email" class="form-control" value="" placeholder="Email address">
+                        <!-- <span class="help-block text-danger"><?php echo $email_err; ?></span>                                                                                                     -->
                     </div>
                     <div class="form-group">
                         <input type="password" name="password" class="form-control" placeholder="Password">
-                        <span class="help-block text-danger"><?php echo $password_err; ?></span>                                                                                                    
+                        <!-- <span class="help-block text-danger"><?php echo $password_err; ?></span>                                                                                                     -->
                     </div>
                     <hr>
                     <div class="form-group">     
-                        <button type="submit" class="btn btn-primary btn-block">L o g i n</button>
+                        <button type="submit" class="btn btn-primary btn-block" name="login">L o g i n</button>
                     </div>
                 </form>
 
